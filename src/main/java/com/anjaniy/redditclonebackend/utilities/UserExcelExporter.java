@@ -37,8 +37,8 @@ public class UserExcelExporter {
         style.setFont(font);
 
         createCell(row, 0, "ID", style);
-        createCell(row, 1, "Nombre", style);
-        createCell(row, 2, "Descripción", style);
+        createCell(row, 1, "Nombre de Usuario", style);
+        createCell(row, 2, "Email", style);
 
     }
 

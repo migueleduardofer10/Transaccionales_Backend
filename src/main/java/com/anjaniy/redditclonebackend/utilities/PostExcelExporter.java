@@ -37,8 +37,8 @@ public class PostExcelExporter {
         style.setFont(font);
 
         createCell(row, 0, "ID", style);
-        createCell(row, 1, "Nombre", style);
-        createCell(row, 2, "Descripción", style);
+        createCell(row, 1, "Nombre del Post", style);
+        createCell(row, 2, "Número de Comentarios", style);
 
     }
 

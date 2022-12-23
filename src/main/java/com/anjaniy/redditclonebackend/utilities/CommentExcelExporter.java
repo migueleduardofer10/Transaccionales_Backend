@@ -37,8 +37,8 @@ public class CommentExcelExporter {
         style.setFont(font);
 
         createCell(row, 0, "ID", style);
-        createCell(row, 1, "Nombre", style);
-        createCell(row, 2, "Descripción", style);
+        createCell(row, 1, "Nombre de Usuario", style);
+        createCell(row, 2, "Texto del Comentario", style);
 
     }
 
@@ -73,8 +73,8 @@ public class CommentExcelExporter {
             Row row = sheet.createRow(rowCount++);
             int columnCount = 0;
             createCell(row, columnCount++, String.valueOf(result.getId()), style);
-            createCell(row, columnCount++, result.getText(), style);
             createCell(row, columnCount++, result.getUserName(), style);
+            createCell(row, columnCount++, result.getText(), style);
 
         }
     }
@@ -90,8 +90,6 @@ public class CommentExcelExporter {
         workbook.close();
 
         servletOutput.close();
-
-
     }
 
 

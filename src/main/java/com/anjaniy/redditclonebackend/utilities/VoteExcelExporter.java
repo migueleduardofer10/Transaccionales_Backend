@@ -1,6 +1,7 @@
 package com.anjaniy.redditclonebackend.utilities;
 
-import com.anjaniy.redditclonebackend.dto.SubredditDto;
+import com.anjaniy.redditclonebackend.dto.CommentDto;
+import com.anjaniy.redditclonebackend.dto.PostResponse;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.Row;
@@ -13,15 +14,15 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-public class SubredditExcelExporter {
+public class VoteExcelExporter {
 
     private XSSFWorkbook workbook;
     private XSSFSheet sheet;
-    private List<SubredditDto> subredditDto;
+    private List<PostResponse> postResponse;
 
 
-    public SubredditExcelExporter (List<SubredditDto> subredditDtos) {
-        this.subredditDto = subredditDtos;
+    public VoteExcelExporter (List<PostResponse> postResponses) {
+        this.postResponse = postResponses;
         workbook = new XSSFWorkbook();
     }
 
@@ -36,8 +37,8 @@ public class SubredditExcelExporter {
         style.setFont(font);
 
         createCell(row, 0, "ID", style);
-        createCell(row, 1, "Nombre del Subreddit", style);
-        createCell(row, 2, "Número de Posts", style);
+        createCell(row, 1, "Nombre del Post", style);
+        createCell(row, 2, "Número de Votes", style);
 
     }
 
@@ -67,13 +68,13 @@ public class SubredditExcelExporter {
         font.setFontHeight(14);
         style.setFont(font);
 
-        for( SubredditDto result: subredditDto) {
+        for( PostResponse result: postResponse) {
 
             Row row = sheet.createRow(rowCount++);
             int columnCount = 0;
             createCell(row, columnCount++, String.valueOf(result.getId()), style);
-            createCell(row, columnCount++, result.getName(), style);
-            createCell(row, columnCount++, result.getNumberOfPosts(), style);
+            createCell(row, columnCount++, result.getPostName(), style);
+            createCell(row, columnCount++, result.getVoteCount(), style);
 
         }
     }
@@ -89,6 +90,8 @@ public class SubredditExcelExporter {
         workbook.close();
 
         servletOutput.close();
+
+
     }
 
 

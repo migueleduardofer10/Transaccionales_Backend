@@ -32,7 +32,6 @@ public class SubredditController {
     public ResponseEntity<SubredditDto> createSubreddit(@RequestBody SubredditDto subredditDto) {
         return ResponseEntity.status(HttpStatus.CREATED).body(subredditService.save(subredditDto));
     }
-
     @GetMapping
     @Operation(summary = "Endpoint To Get All The Subreddits.")
     public ResponseEntity<List<SubredditDto>> getAllSubreddits() {

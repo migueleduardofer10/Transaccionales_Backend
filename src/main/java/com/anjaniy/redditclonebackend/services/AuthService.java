@@ -1,9 +1,6 @@
 package com.anjaniy.redditclonebackend.services;
 
-import com.anjaniy.redditclonebackend.dto.AuthenticationResponse;
-import com.anjaniy.redditclonebackend.dto.LoginRequest;
-import com.anjaniy.redditclonebackend.dto.RefreshTokenRequest;
-import com.anjaniy.redditclonebackend.dto.RegisterRequest;
+import com.anjaniy.redditclonebackend.dto.*;
 import com.anjaniy.redditclonebackend.exceptions.SpringRedditException;
 import com.anjaniy.redditclonebackend.models.NotificationEmail;
 import com.anjaniy.redditclonebackend.models.User;
@@ -21,10 +18,12 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.time.Instant;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
 import static com.anjaniy.redditclonebackend.utilities.Constants.ACTIVATION_EMAIL;
+import static java.util.stream.Collectors.toList;
 
 @Service
 @AllArgsConstructor
@@ -121,5 +120,13 @@ public class AuthService {
     public boolean isLoggedIn() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         return !(authentication instanceof AnonymousAuthenticationToken) && authentication.isAuthenticated();
+    }
+
+    @Transactional(readOnly = true)
+    public List<User> getAll() {
+        return userRepo.findAll()
+                .stream()
+                .collect(toList());
+
     }
 }
